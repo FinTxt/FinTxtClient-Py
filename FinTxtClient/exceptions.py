@@ -4,8 +4,8 @@
 #
 # ------------------
 
-def FinTxtClientException(Exception):
+class FinTxtClientException(Exception):
 
-    '''
-    @desc: default exception raised by the FinTxtClient program
-    '''
+        '''
+        @desc: default exception raised by the FinTxtClient program
+        '''

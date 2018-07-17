@@ -4,7 +4,10 @@
 # You shall use it only in accordance with the terms of the
 # license agreement you entered into with FinTxt.io Ltd.
 
-# Logging
+from FinTxtClient.api.FinTxtAPI import FinTxtAPI
+from FinTxtClient.routes.languages import languages
+from FinTxtClient.routes.live import live
+from FinTxtClient.routes.historic import historic
 
 class FinTxtClient(object):
 
@@ -15,28 +18,53 @@ class FinTxtClient(object):
     @return: FinTxtClient object
     '''
 
-    def __init__(self, key = None, server = "127.0.0.1"):
+    def __init__(self, key = None, server = "http://127.0.0.1:8000"):
 
         self._key = key
         self._server = server
 
-    def languages():
+    def languages(self):
 
         '''
         @desc: call the languages endpoint
         '''
 
-        self._FinTxtAPI = FinTxtAPI(self._key, self.server, requires_key = False)
+        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
 
-    def live_one(language, type, q):
+        # Call languages endpoint
+        return(languages(self._FinTxtAPI).get_languages())
+
+    def live_one(self, _type, language, q):
+
+        '''
+        @desc: call the live endpoint for a single commodity or company
+        '''
+
+        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = True)
+
+        # Call live endpoint
+        return(live(self._FinTxtAPI).live_one(_type, language, q))
+
+    def historic_one(self, _type, language, date, q):
+
+        '''
+        @desc: call the historic endpoint
+        '''
+
+        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
+
+        # Call historic endpoint
+        return(historic(self._FinTxtAPI).historic_one(_type, language, date, q))
+
+    def live_portfolio(self, language, type, identifiers, weights):
 
         '''
         @desc: call the live endpoint
         '''
 
-        self._FinTxtAPI = FinTxtAPI(self._key, self.server, requires_key = True)
+        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = True)
 
-    def historic_one(language, type, date, q):
+    def historic_portfolio(self, language, type, date, identifiers, weights):
 
         '''
         @desc: call the historic endpoint
@@ -44,22 +72,4 @@ class FinTxtClient(object):
 
         # Check from & to date to see if key is necessary
 
-        self._FinTxtAPI = FinTxtAPI(self._key, self.server, requires_key = False)
-
-    def live_portfolio(language, type, identifiers, weights):
-
-        '''
-        @desc: call the live endpoint
-        '''
-
-        self._FinTxtAPI = FinTxtAPI(self._key, self.server)
-
-    def historic_portfolio(language, type, date, identifiers, weights):
-
-        '''
-        @desc: call the historic endpoint
-        '''
-
-        # Check from & to date to see if key is necessary
-
-        self._FinTxtAPI = FinTxtAPI(self._key, self.server)
+        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
