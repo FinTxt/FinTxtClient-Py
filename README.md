@@ -9,7 +9,7 @@ Python client to work with the FinTxt news intensities API.
 
 You can install the package by executing:
 
-```python
+```bash
 pip install git+https://github.com/FinTxt/FinTxtClient-Py.git --user
 ```
 
