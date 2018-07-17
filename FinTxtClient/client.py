@@ -23,6 +23,10 @@ class FinTxtClient(object):
         self._key = key
         self._server = server
 
+    def __repr__(self):
+
+        return("<FinTxtClient(key='{}', server='{}')>".format(self._key, self._server))
+
     def languages(self):
 
         '''
