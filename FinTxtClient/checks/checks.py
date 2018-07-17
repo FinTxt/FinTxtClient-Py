@@ -49,6 +49,14 @@ class checks(object):
 
     def check_date(self, date):
 
+        '''
+        @desc: check if date passed in proper format
+        @params:
+            - date: date passed by user
+        @return:
+            - converted date
+        '''
+
         # Format date
         format_str = '%d-%m-%Y'
 
@@ -62,3 +70,9 @@ class checks(object):
             raise FinTxtClientException("Date {} not in correct format. Pass the date value as 'DD-MM-YYYY'".format(date))
 
         return(date_conv)
+
+    def check_portfolio(self, weights, identifiers):
+
+        if not len(weights) == len(identifiers):
+
+            raise FinTxtClientException("Length of identifiers is not equal to length of weights")

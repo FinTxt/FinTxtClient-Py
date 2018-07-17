@@ -5,6 +5,8 @@
 # -----------------------------------------
 
 import requests
+import warnings
+import json
 
 import FinTxtClient
 from FinTxtClient.exceptions import FinTxtClientException
@@ -28,10 +30,15 @@ class FinTxtAPI:
 
         # Set variables
         self._key = key
+
         if not server.endswith("/"):
+
             self._server = server + "/"
+
         else:
+
             self._server = server
+
         self._requires_key = requires_key
 
     def make_request(self, url, method, body = None):
@@ -41,7 +48,7 @@ class FinTxtAPI:
         @params:
             - url: which endpoint to call?
             - method: GET or POST
-            - body: request body. Defaults to None
+            - body: request body as python dict. Defaults to None
         '''
 
         # Headers
@@ -57,19 +64,41 @@ class FinTxtAPI:
 
                 raise FinTxtClientException("Please supply a valid API key")
 
+        # If body not none, cast to json
+        if not body == None:
+
+            # To json
+            body_json = json.dumps(body)
+
         resp = None
 
         if method == 'GET':
+
             response = requests.get(url, headers=headers)
 
         elif method == 'POST':
-            response = requests.post(url, headers=headers, data=body)
+
+            response = requests.post(url, headers=headers, data=body_json)
+
         else:
+
             raise FinTxtClientException('Method ' + method + ' not supported')
 
         if response.status_code != 200:
-            raise FinTxtClientException("Response: {} - {}".format(response.status_code, response.content))
+
+            raise FinTxtClientException("Response: {}".format(json.loads(response.content)))
 
         ## WARNINGS
+        resp = json.loads(response.content)
 
-        return(response)
+        if type(resp) is not list:
+
+            if "warnings" in resp.keys():
+
+                if resp["warnings"]["warnings"]:
+
+                    for warning in resp["warnings"]["warning"]:
+
+                        warnings.warn(warning)
+
+        return(resp)

@@ -56,20 +56,24 @@ class FinTxtClient(object):
         # Call historic endpoint
         return(historic(self._FinTxtAPI).historic_one(_type, language, date, q))
 
-    def live_portfolio(self, language, type, identifiers, weights):
+    def live_portfolio(self, _type, language, identifiers, weights):
 
         '''
-        @desc: call the live endpoint
+        @desc: call the live portfolio endpoint
         '''
 
         self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = True)
 
-    def historic_portfolio(self, language, type, date, identifiers, weights):
+        # Call live portfolio endpoint
+        return(live(self._FinTxtAPI).live_portfolio(_type, language, identifiers, weights))
+
+    def historic_portfolio(self, _type, language, date, identifiers, weights):
 
         '''
         @desc: call the historic endpoint
         '''
 
-        # Check from & to date to see if key is necessary
-
         self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
+
+        # Call historic portfolio endpoint
+        return(historic(self._FinTxtAPI).historic_portfolio(_type, language, date, identifiers, weights))

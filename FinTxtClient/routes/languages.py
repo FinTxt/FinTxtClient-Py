@@ -5,7 +5,6 @@
 # --------------------------------
 
 import requests
-import json
 
 class languages(object):
 
@@ -31,4 +30,4 @@ class languages(object):
         resp = self._apiClient.make_request(req, "GET")
 
         # return
-        return(json.loads(resp.content))
+        return(resp)
