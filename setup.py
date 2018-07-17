@@ -11,7 +11,7 @@ setup(
     author_email='jasperginn@gmail.com',
     license='GPL3',
     packages=find_packages(exclude=["tests", "tests.*"]),
-    install_requires=['requests', 'json', 'datetime', 'warnings'],
+    install_requires=['requests', 'datetime', 'warnings'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
