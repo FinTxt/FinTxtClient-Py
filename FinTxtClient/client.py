@@ -25,6 +25,10 @@ class FinTxtClient(object):
 
     def __repr__(self):
 
+        '''
+        @desc: print FinTxtClient object
+        '''
+
         return("<FinTxtClient(key='{}', server='{}')>".format(self._key, self._server))
 
     def languages(self):
@@ -38,7 +42,7 @@ class FinTxtClient(object):
         # Call languages endpoint
         return(languages(self._FinTxtAPI).get_languages())
 
-    def live_one(self, _type, language, q):
+    def live_one(self, _type: str, language: str, q: str):
 
         '''
         @desc: call the live endpoint for a single commodity or company
@@ -49,7 +53,7 @@ class FinTxtClient(object):
         # Call live endpoint
         return(live(self._FinTxtAPI).live_one(_type, language, q))
 
-    def historic_one(self, _type, language, date, q):
+    def historic_one(self, _type: str, language: str, date: str, q: str):
 
         '''
         @desc: call the historic endpoint
@@ -60,7 +64,7 @@ class FinTxtClient(object):
         # Call historic endpoint
         return(historic(self._FinTxtAPI).historic_one(_type, language, date, q))
 
-    def live_portfolio(self, _type, language, identifiers, weights):
+    def live_portfolio(self, _type: str, language: str, identifiers: list, weights: list):
 
         '''
         @desc: call the live portfolio endpoint
@@ -71,7 +75,7 @@ class FinTxtClient(object):
         # Call live portfolio endpoint
         return(live(self._FinTxtAPI).live_portfolio(_type, language, identifiers, weights))
 
-    def historic_portfolio(self, _type, language, date, identifiers, weights):
+    def historic_portfolio(self, _type: str, language: str, date: str, identifiers: list, weights: list):
 
         '''
         @desc: call the historic endpoint
