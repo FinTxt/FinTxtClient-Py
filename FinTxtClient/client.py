@@ -18,7 +18,7 @@ class FinTxtClient(object):
     @return: FinTxtClient object
     '''
 
-    def __init__(self, key = None, server = "http://127.0.0.1:8000"):
+    def __init__(self, key = None, server = "http://api.fintxt.io/rest"):
 
         self._key = key
         self._server = server
