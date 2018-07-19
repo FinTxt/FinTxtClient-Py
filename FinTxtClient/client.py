@@ -18,10 +18,12 @@ class FinTxtClient(object):
     @return: FinTxtClient object
     '''
 
-    def __init__(self, key = None, server = "http://api.fintxt.io/rest"):
+    def __init__(self, key = None, server = "https://api.fintxt.io/rest"):
 
         self._key = key
         self._server = server
+
+        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
 
     def __repr__(self):
 
@@ -37,8 +39,6 @@ class FinTxtClient(object):
         @desc: call the languages endpoint
         '''
 
-        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
-
         # Call languages endpoint
         return(languages(self._FinTxtAPI).get_languages())
 
@@ -48,7 +48,7 @@ class FinTxtClient(object):
         @desc: call the live endpoint for a single commodity or company
         '''
 
-        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = True)
+        self._FinTxtAPI._requires_key = True
 
         # Call live endpoint
         return(live(self._FinTxtAPI).live_one(_type, language, q))
@@ -59,8 +59,6 @@ class FinTxtClient(object):
         @desc: call the historic endpoint
         '''
 
-        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
-
         # Call historic endpoint
         return(historic(self._FinTxtAPI).historic_one(_type, language, date, q))
 
@@ -70,7 +68,7 @@ class FinTxtClient(object):
         @desc: call the live portfolio endpoint
         '''
 
-        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = True)
+        self._FinTxtAPI._requires_key = True
 
         # Call live portfolio endpoint
         return(live(self._FinTxtAPI).live_portfolio(_type, language, identifiers, weights))
@@ -81,7 +79,7 @@ class FinTxtClient(object):
         @desc: call the historic endpoint
         '''
 
-        self._FinTxtAPI = FinTxtAPI(self._server, self._key, requires_key = False)
+        self._FinTxtAPI._requires_key = True
 
         # Call historic portfolio endpoint
         return(historic(self._FinTxtAPI).historic_portfolio(_type, language, date, identifiers, weights))
