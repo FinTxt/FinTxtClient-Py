@@ -1,6 +1,6 @@
 # FinTxtClient
 
-[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](http://www.repostatus.org/badges/latest/inactive.svg)](http://www.repostatus.org) [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django.svg) [![Build Status](https://travis-ci.org/FinTxt/FinTxtClient-Py.svg?branch=master)](https://travis-ci.org/FinTxt/FinTxtClient-Py)
 
 Python client to work with the FinTxt news intensities API.
@@ -34,9 +34,3 @@ client = FinTxtClient(key='<yourkey>')
 ```
 
 See the [documentation](https://fintxt.github.io/documentation/theapi.html) for more information.
-
-// TODO: add travis
-
-// TODO: add codecov
-
-// TODO: add unit tests
