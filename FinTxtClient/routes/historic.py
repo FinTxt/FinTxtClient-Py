@@ -36,6 +36,9 @@ class historic(object):
             - q: RIC code for the company for which you want to query news intensity values or name of commodity for which you want to query news intensity values. See documentation for supported commodities.
         @return
         '''
+        
+        # This should be the standard value unless necessary downstream
+        self._apiClient._requires_key = False
 
         # Checks
         ch = checks(_type, language)
@@ -81,6 +84,8 @@ class historic(object):
             - weights: Weight of each company/commodity in your portfolio in decimal format. Should sum to 1, but the API will still return news intensities if this is not the case. See example section.
         @return:
         '''
+        
+        self._apiClient._requires_key = False
 
         self._endpoint = "portfolio/{}".format(self._endpoint)
 
