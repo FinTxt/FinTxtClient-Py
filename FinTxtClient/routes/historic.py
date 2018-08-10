@@ -51,7 +51,7 @@ class historic(object):
         free = current - datetime.timedelta(30)
 
         # Needs key if want this endpoint
-        if date_conv >= free:
+        if date_conv.date() >= free:
 
             self._apiClient._requires_key = True
 
